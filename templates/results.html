@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Recommendations</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Course Recommendations</h1>
+      <h2>NPTEL</h2>
+      <ul>
+        {% for course in nptel %}
+        <li>
+          <a href="{{ course['NPTEL URL'] }}">{{ course['Course Name'] }}</a> -
+          {{course['Discipline']}}
+          <button
+            class="btn btn-link"
+            id="nptel-btn-{{ loop.index }}"
+            onclick="fetchDescription('nptel', '{{ user_input|urlencode }}', '{{ course['Course Name']|urlencode }}', {{ loop.index }})"
+          >
+            Generate Personalised Course Review
+          </button>
+          <p id="nptel-desc-{{ loop.index }}"></p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h2>Udemy</h2>
+      <ul>
+        {% for course in udemy %}
+        <li>
+          <a href="{{ course['url'] }}">{{ course['course_title'] }}</a> -
+          {{course['subject']}}
+          <button
+            class="btn btn-link"
+            id="udemy-btn-{{ loop.index }}"
+            onclick="fetchDescription('udemy', '{{ user_input|urlencode }}', '{{ course['course_title']|urlencode }}', {{ loop.index }})"
+          >
+            Generate Personalised Course Review
+          </button>
+          <p id="udemy-desc-{{ loop.index }}"></p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h2>Coursera</h2>
+      <ul>
+        {% for course in coursera %}
+        <li>
+          <a href="{{ course['Course Url'] }}">{{ course['Course Title'] }}</a>
+          - {{course['Keyword']}}
+          <button
+            class="btn btn-link"
+            id="coursera-btn-{{ loop.index }}"
+            onclick="fetchDescription('coursera', '{{ user_input|urlencode }}', '{{ course['Course Title']|urlencode }}', {{ loop.index }})"
+          >
+            Generate Personalised Course Review
+          </button>
+          <p id="coursera-desc-{{ loop.index }}"></p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h2>MIT OpenCourseWare</h2>
+      <p>(course may or may not have lecture videos)</p>
+      <ul>
+        {% for course in mit %}
+        <li>
+          <a href="{{ course['URL'] }}">{{ course['Course Title'] }}</a>
+          <button
+            class="btn btn-link"
+            id="mit-btn-{{ loop.index }}"
+            onclick="fetchDescription('mit', '{{ user_input|urlencode }}', '{{ course['Course Title']|urlencode }}', {{ loop.index }})"
+          >
+            Generate Personalised Course Review
+          </button>
+          <p id="mit-desc-{{ loop.index }}"></p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <script>
+      function fetchDescription(platform, userInput, courseName, index) {
+        const button = document.getElementById(`${platform}-btn-${index}`);
+        button.textContent = "Building Description...";
+        fetch(`/about_${platform}?user_input=${userInput}&course=${courseName}`)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(`${platform}-desc-${index}`).innerHTML =
+              data;
+            button.style.display = "none"; // Hide the button
+          });
+      }
+    </script>
+  </body>
+</html>

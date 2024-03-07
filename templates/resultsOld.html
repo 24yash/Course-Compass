@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Recommendations</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="mt-5">Course Recommendations</h1>
+      <h2>NPTEL</h2>
+      <ul>
+        {% for course in nptel %}
+        <li>
+          <a href="{{ course['NPTEL URL'] }}">{{ course['Course Name'] }}</a> - {{course['Discipline']}}
+          <p id="nptel-desc-{{ loop.index }}">Building description...</p>
+        </li>
+    </li>
+    {% endfor %}
+      </ul>
+      <h2>Udemy</h2>
+      <ul>
+        {% for course in udemy %}
+        <li>
+          <a href="{{ course['url'] }}">{{ course['course_title'] }}</a> - {{
+          course['subject'] }}
+          <p id="udemy-desc-{{ loop.index }}">Building description...</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h2>Coursera</h2>
+      <ul>
+        {% for course in coursera %}
+        <li>
+          <a href="{{ course['Course Url'] }}">{{ course['Course Title'] }}</a>
+          - {{ course['Keyword'] }}
+          <p id="coursera-desc-{{ loop.index }}">Building description...</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <script>
+      // Fetch descriptions for NPTEL courses
+      {% for course in nptel %}
+      fetch('/about_nptel?user_input={{ user_input }}&course={{ course['Course Name'] }}')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('nptel-desc-{{ loop.index }}').innerHTML = data;
+        });
+      {% endfor %}
+
+      // Fetch descriptions for Udemy courses
+      {% for course in udemy %}
+      fetch('/about_udemy?user_input={{ user_input }}&course={{ course['course_title'] }}')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('udemy-desc-{{ loop.index }}').innerHTML = data;
+        });
+      {% endfor %}
+
+      // Fetch descriptions for Coursera courses
+      {% for course in coursera %}
+      fetch('/about_coursera?user_input={{ user_input }}&course={{ course['Course Title'] }}')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('coursera-desc-{{ loop.index }}').innerHTML = data;
+        });
+      {% endfor %}
+    </script>
+  </body>
+</html>
