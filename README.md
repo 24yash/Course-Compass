@@ -13,10 +13,10 @@ Course Compass is a Flask-based web application that leverages machine learning 
 1. Clone the repository: `git clone https://github.com/username/Course-Compass.git`
 2. Navigate to the project directory: `cd Course-Compass`
 3. Install the requirements: `pip install -r requirements.txt`
-4. Run the Flask app: `flask run`
+4. Run the Flask app: `python app.py`
 
 ## Usage
 
-1. Open your web browser and navigate to `http://localhost:5000`.
-2. Enter your search keywords in the search bar and click "Search".
+1. Open your web browser and navigate to `http://127.0.0.1:5000`.
+2. Enter your search keywords in the search bar and click "Submit".
 3. Get course recommendations from multiple platforms and personalized course reviews.
