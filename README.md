@@ -1,10 +1,10 @@
-# Course Compass: Multi-Platform Course Recommendation System
+# Course Compass: Multi-Platform Course Search Engine 
 
-Course Compass is a Flask-based web application that leverages machine learning models to provide course recommendations from multiple educational platforms including Udemy, Coursera, NPTEL, and MIT OpenCourseWare. It also features a personalized course review feature using Google's Generative AI model, Gemini, to generate unique course descriptions based on user's search keywords.
+Course Compass is a Flask-based web application that leverages machine learning models for efficient course searching from multiple educational platforms including Udemy, Coursera, NPTEL, and MIT OpenCourseWare. It also features a personalized course review feature using Google's Generative AI model, Gemini, to generate unique course descriptions based on user's search keywords.
 
 ## Features
 
-- Multi-platform course recommendations: Get course recommendations from Udemy, Coursera, NPTEL, and MIT OpenCourseWare.
+- Multi-platform course search: Get course recommendations from Udemy, Coursera, NPTEL, and MIT OpenCourseWare.
 - Personalized course reviews: Generate unique course descriptions based on your search keywords using Google's Generative AI model, Gemini.
 - User-friendly web interface: Get detailed course information and personalized recommendations through a user-friendly web interface.
 
